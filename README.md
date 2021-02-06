@@ -1,7 +1,7 @@
 # Products
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tipoff/products.svg?style=flat-square)](https://packagist.org/packages/tipoff/products)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/tipoff/products/run-tests?label=tests)](https://github.com/tipoff/products/actions?query=workflow%3ATests+branch%3Amaster)
+![Tests](https://github.com/tipoff/products/workflows/Tests/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/tipoff/products.svg?style=flat-square)](https://packagist.org/packages/tipoff/products)
 
 This is where your description should go.
