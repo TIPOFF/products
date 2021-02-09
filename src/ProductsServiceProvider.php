@@ -6,7 +6,6 @@ namespace Tipoff\Products;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Tipoff\Products\Commands\ProductsCommand;
 
 class ProductsServiceProvider extends PackageServiceProvider
 {
