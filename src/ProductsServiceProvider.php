@@ -4,25 +4,19 @@ declare(strict_types=1);
 
 namespace Tipoff\Products;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Tipoff\Products\Models\Product;
+use Tipoff\Products\Policies\ProductPolicy;
+use Tipoff\Support\TipoffPackage;
+use Tipoff\Support\TipoffServiceProvider;
 
-class ProductsServiceProvider extends PackageServiceProvider
+class ProductsServiceProvider extends TipoffServiceProvider
 {
-    public function boot()
+    public function configureTipoffPackage(TipoffPackage $package): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        parent::boot();
-    }
-
-    public function configurePackage(Package $package): void
-    {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
+            ->hasPolicies([
+                Product::class => ProductPolicy::class,
+            ])
             ->name('products')
             ->hasConfigFile();
     }
