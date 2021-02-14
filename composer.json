@@ -44,10 +44,7 @@
         "laravel": {
             "providers": [
                 "Tipoff\\Products\\ProductsServiceProvider"
-            ],
-            "aliases": {
-                "Products": "Tipoff\\Products\\ProductsFacade"
-            }
+            ]
         }
     },
     "repositories": [
