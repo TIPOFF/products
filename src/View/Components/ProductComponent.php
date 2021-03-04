@@ -23,7 +23,7 @@ class ProductComponent extends Component
     public function render()
     {
         /** @var View $view */
-        $view = view('components.product');
+        $view = view('products::components.product');
 
         return $view;
     }
