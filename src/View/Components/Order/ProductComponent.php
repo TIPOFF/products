@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tipoff\Products\View\Components;
+namespace Tipoff\Products\View\Components\Order;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
 use Tipoff\Products\Models\Product;
 use Tipoff\Support\Contracts\Checkout\OrderItemInterface;
 
-class ProductOrderItemComponent extends Component
+class ProductComponent extends Component
 {
     public OrderItemInterface $orderItem;
     public Product $sellable;

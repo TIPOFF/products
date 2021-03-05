@@ -9,7 +9,7 @@ use Tipoff\Products\Tests\TestCase;
 use Tipoff\Support\Contracts\Checkout\CartItemInterface;
 use Tipoff\Support\Objects\DiscountableValue;
 
-class ProductCartItemComponentTest extends TestCase
+class ProductComponentTest extends TestCase
 {
     /** @test */
     public function single_item()

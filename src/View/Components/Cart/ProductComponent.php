@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tipoff\Products\View\Components;
+namespace Tipoff\Products\View\Components\Cart;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
 use Tipoff\Products\Models\Product;
 use Tipoff\Support\Contracts\Checkout\CartItemInterface;
 
-class ProductCartItemComponent extends Component
+class ProductComponent extends Component
 {
     public CartItemInterface $cartItem;
     public Product $sellable;

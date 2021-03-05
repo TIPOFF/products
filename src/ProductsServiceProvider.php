@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Tipoff\Products;
 
 use Tipoff\Products\Nova\Product;
-use Tipoff\Products\View\Components\ProductCartItemComponent;
-use Tipoff\Products\View\Components\ProductOrderItemComponent;
+use Tipoff\Products\View\Components;
 use Tipoff\Support\TipoffPackage;
 use Tipoff\Support\TipoffServiceProvider;
 
@@ -19,8 +18,8 @@ class ProductsServiceProvider extends TipoffServiceProvider
                 Product::class,
             ])
             ->hasBladeComponents([
-                'product-cart-item' => ProductCartItemComponent::class,
-                'product-order-item' => ProductOrderItemComponent::class,
+                'product-cart-item' => Components\Cart\ProductComponent::class,
+                'product-order-item' => Components\Order\ProductComponent::class,
             ])
             ->name('products')
             ->hasViews()
