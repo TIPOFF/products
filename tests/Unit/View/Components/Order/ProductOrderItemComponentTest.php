@@ -6,7 +6,6 @@ namespace Tipoff\Products\Tests\Unit\View\Components\Order;
 
 use Tipoff\Products\Models\Product;
 use Tipoff\Products\Tests\TestCase;
-use Tipoff\Support\Contracts\Checkout\CartItemInterface;
 use Tipoff\Support\Contracts\Checkout\OrderItemInterface;
 use Tipoff\Support\Objects\DiscountableValue;
 
