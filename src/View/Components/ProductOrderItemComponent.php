@@ -7,23 +7,23 @@ namespace Tipoff\Products\View\Components;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 use Tipoff\Products\Models\Product;
-use Tipoff\Support\Contracts\Checkout\CartItemInterface;
+use Tipoff\Support\Contracts\Checkout\OrderItemInterface;
 
-class ProductComponent extends Component
+class ProductOrderItemComponent extends Component
 {
-    public CartItemInterface $cartItem;
+    public OrderItemInterface $orderItem;
     public Product $sellable;
 
-    public function __construct(CartItemInterface $cartItem, Product $sellable)
+    public function __construct(OrderItemInterface $orderItem, Product $sellable)
     {
-        $this->cartItem = $cartItem;
+        $this->orderItem = $orderItem;
         $this->sellable = $sellable;
     }
 
     public function render()
     {
         /** @var View $view */
-        $view = view('products::components.product');
+        $view = view('products::components.order.product');
 
         return $view;
     }
