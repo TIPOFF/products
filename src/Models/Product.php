@@ -28,7 +28,7 @@ class Product extends BaseModel implements ProductInterface
 
     public function getViewComponent($context = null)
     {
-        return 'product';
+        return implode('-', ['tipoff', 'product', $context]);
     }
 
     public function getDescription(): string

@@ -21,6 +21,15 @@ class ProductModelTest extends TestCase
         $this->assertNotNull($model);
     }
 
+    public function view_component()
+    {
+        /** @var Product $product */
+        $product = Product::factory()->create();
+
+        $this->assertEquals('tipoff-product-cart-item', $product->getViewComponent('cart-item'));
+        $this->assertEquals('tipoff-product-order-item', $product->getViewComponent('order-item'));
+    }
+
     /** @test */
     public function cart_item_with_no_service()
     {

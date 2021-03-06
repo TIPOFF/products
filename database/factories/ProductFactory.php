@@ -16,7 +16,7 @@ class ProductFactory extends Factory
     {
         $sentence = $this->faker->unique()->sentence;
         return [
-            'sku'           => $this->faker->asciify('******'),
+            'sku'           => $this->faker->unique()->regexify('[A-Z]{3}-[0-9]{3}'),
             'slug'          => Str::slug($sentence),
             'title'         => $sentence,
             'amount'        => $this->faker->numberBetween(100, 10000),
