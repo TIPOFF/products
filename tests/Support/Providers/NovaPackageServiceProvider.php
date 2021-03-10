@@ -9,5 +9,7 @@ use Tipoff\Products\Nova\Product;
 
 class NovaPackageServiceProvider extends BaseNovaPackageServiceProvider
 {
-	Product::class,
+	public static array $packageResources = [
+        Product::class,
+    ];
 }
