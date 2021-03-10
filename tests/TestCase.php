@@ -10,6 +10,7 @@ use Tipoff\Products\ProductsServiceProvider;
 use Tipoff\Products\Tests\Support\Providers\NovaPackageServiceProvider;
 use Tipoff\Support\SupportServiceProvider;
 use Tipoff\TestSupport\BaseTestCase;
+use Tipoff\Addresses\AddressesServiceProvider;
 
 class TestCase extends BaseTestCase
 {
@@ -23,6 +24,7 @@ class TestCase extends BaseTestCase
             PermissionServiceProvider::class,
             LocationsServiceProvider::class,
             ProductsServiceProvider::class,
+            AddressesServiceProvider::class,
         ];
     }
 }
