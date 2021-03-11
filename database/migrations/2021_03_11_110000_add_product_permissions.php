@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Tipoff\Authorization\Permissions\BasePermissionsMigration;
 
-class AddProdcutPermissions extends BasePermissionsMigration
+class AddProductPermissions extends BasePermissionsMigration
 {
     public function up()
     {
