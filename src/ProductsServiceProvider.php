@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tipoff\Products;
 
 use Tipoff\Products\Models\Product;
+use Tipoff\Products\Policies\ProductPolicy;
 use Tipoff\Products\View\Components;
 use Tipoff\Support\TipoffPackage;
 use Tipoff\Support\TipoffServiceProvider;
-use Tipoff\Products\Policies\ProductPolicy;
 
 class ProductsServiceProvider extends TipoffServiceProvider
 {
