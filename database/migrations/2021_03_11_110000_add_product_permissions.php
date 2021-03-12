@@ -9,7 +9,7 @@ class AddProductPermissions extends BasePermissionsMigration
     public function up()
     {
         $permissions = [
-            'view prodcuts' => ['Owner', 'Staff'],
+            'view products' => ['Owner', 'Staff'],
             'create products' => ['Owner'],
             'update products' => ['Owner'],
         ];
