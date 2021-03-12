@@ -27,7 +27,7 @@ class Product extends BaseResource
         'title',
     ];
 
-    public static $group = 'Operations Units';
+    public static $group = 'Ecommerce Items';
 
     public function fieldsForIndex(NovaRequest $request)
     {
