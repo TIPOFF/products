@@ -17,3 +17,7 @@ All notable changes to `products` will be documented in this file.
 - add nova resource
 - register nova resource
 - add view components for cart & order
+
+## 2.0.1 - 2021-03-12
+
+- update permissions
