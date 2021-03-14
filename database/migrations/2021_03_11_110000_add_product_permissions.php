@@ -9,9 +9,9 @@ class AddProductPermissions extends BasePermissionsMigration
     public function up()
     {
         $permissions = [
-            'view products' => ['Owner', 'Staff'],
-            'create products' => ['Owner'],
-            'update products' => ['Owner'],
+            'view products' => ['Owner', 'Executive', 'Staff'],
+            'create products' => ['Owner', 'Executive'],
+            'update products' => ['Owner', 'Executive'],
         ];
 
         $this->createPermissions($permissions);
