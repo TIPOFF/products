@@ -8,9 +8,9 @@ use Tipoff\Addresses\AddressesServiceProvider;
 use Tipoff\Authorization\AuthorizationServiceProvider;
 use Tipoff\Locations\LocationsServiceProvider;
 use Tipoff\Products\ProductsServiceProvider;
-use Tipoff\Products\Tests\Support\Providers\NovaPackageServiceProvider;
 use Tipoff\Support\SupportServiceProvider;
 use Tipoff\TestSupport\BaseTestCase;
+use Tipoff\TestSupport\Providers\NovaPackageServiceProvider;
 
 class TestCase extends BaseTestCase
 {
