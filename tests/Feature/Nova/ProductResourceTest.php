@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Tipoff\Products\Tests\Feature\Nova;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tipoff\Authorization\Models\User;
 use Tipoff\Products\Models\Product;
 use Tipoff\Products\Tests\TestCase;
-use Spatie\Permission\Models\Role;
-use Tipoff\Authorization\Models\User;
 
 class ProductResourceTest extends TestCase
 {
