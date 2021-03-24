@@ -16,20 +16,38 @@ class ProductResourceTest extends TestCase
     
     private const NOVA_ROUTE = 'nova-api/products';
     
-    /** @test */
-    public function index()
+    /**
+     * @dataProvider dataProviderForIndexByRole
+     * @test
+     */
+    public function index_by_role(?string $role, bool $hasAccess, bool $canIndex)
     {
-        Product::factory()->count(3)->create();
+        Product::factory()->count(4)->create();
 
-        /** @var User $user */
-        $user = User::factory()->create()->givePermissionTo(
-            Role::findByName('Admin')->getPermissionNames()     // Use individual permissions so we can revoke one
-        );
+        $user = User::factory()->create();
+        if ($role) {
+            $user->assignRole($role);
+        }
         $this->actingAs($user);
 
         $response = $this->getJson(self::NOVA_ROUTE)
-            ->assertOk();
+            ->assertStatus($hasAccess ? 200 : 403);
 
-        $this->assertCount(3, $response->json('resources'));
+        if ($hasAccess) {
+            $this->assertCount($canIndex ? 4 : 0, $response->json('resources'));
+        }
+    }
+
+    public function dataProviderForIndexByRole()
+    {
+        return [
+            'Admin' => ['Admin', true, true],
+            'Owner' => ['Owner', true, true],
+            'Executive' => ['Executive', true, true],
+            'Staff' => ['Staff', true, true],
+            'Former Staff' => ['Former Staff', false, false],
+            'Customer' => ['Customer', false, false],
+            'No Role' => [null, false, false],
+        ];
     }
 }
