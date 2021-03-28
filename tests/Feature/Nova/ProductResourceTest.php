@@ -5,36 +5,48 @@ declare(strict_types=1);
 namespace Tipoff\Products\Tests\Feature\Nova;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tipoff\Authorization\Models\User;
 use Tipoff\Products\Models\Product;
 use Tipoff\Products\Tests\TestCase;
 
 class ProductResourceTest extends TestCase
 {
     use DatabaseTransactions;
-
-    /** @test */
-    public function index()
+    
+    private const NOVA_ROUTE = 'nova-api/products';
+    
+    /**
+     * @dataProvider dataProviderForIndexByRole
+     * @test
+     */
+    public function index_by_role(?string $role, bool $hasAccess, bool $canIndex)
     {
         Product::factory()->count(4)->create();
 
-        $this->actingAs(self::createPermissionedUser('view products', true));
+        $user = User::factory()->create();
+        if ($role) {
+            $user->assignRole($role);
+        }
+        $this->actingAs($user);
 
-        $response = $this->getJson('nova-api/products')
-            ->assertOk();
+        $response = $this->getJson(self::NOVA_ROUTE)
+            ->assertStatus($hasAccess ? 200 : 403);
 
-        $this->assertCount(4, $response->json('resources'));
+        if ($hasAccess) {
+            $this->assertCount($canIndex ? 4 : 0, $response->json('resources'));
+        }
     }
 
-    /** @test */
-    public function show()
+    public function dataProviderForIndexByRole()
     {
-        $product = Product::factory()->create();
-
-        $this->actingAs(self::createPermissionedUser('view products', true));
-
-        $response = $this->getJson("nova-api/products/{$product->id}")
-            ->assertOk();
-
-        $this->assertEquals($product->id, $response->json('resource.id.value'));
+        return [
+            'Admin' => ['Admin', true, true],
+            'Owner' => ['Owner', true, true],
+            'Executive' => ['Executive', true, true],
+            'Staff' => ['Staff', true, true],
+            'Former Staff' => ['Former Staff', false, false],
+            'Customer' => ['Customer', false, false],
+            'No Role' => [null, false, false],
+        ];
     }
 }
