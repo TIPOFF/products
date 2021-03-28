@@ -21,3 +21,7 @@ All notable changes to `products` will be documented in this file.
 ## 2.0.1 - 2021-03-12
 
 - update permissions
+
+## 2.0.2 - 2021-03-28
+
+- update tests
