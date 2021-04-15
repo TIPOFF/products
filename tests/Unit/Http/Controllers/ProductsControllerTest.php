@@ -99,7 +99,7 @@ class ProductsControllerTest extends TestCase
         $product = Product::factory()->create();
         $this->get(route('products.add-to-cart', [
             'product' => $product,
-            'quantity' => 1
+            'quantity' => 1,
         ]))
             ->assertStatus(500);
     }
@@ -127,7 +127,7 @@ class ProductsControllerTest extends TestCase
 
         $this->get(route('products.add-to-cart', [
             'product' => $product,
-            'quantity' => 1
+            'quantity' => 1,
         ]))
             ->assertRedirect();
     }

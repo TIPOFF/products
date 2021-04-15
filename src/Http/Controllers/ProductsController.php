@@ -28,14 +28,14 @@ class ProductsController extends BaseController
         ]);
     }
 
-    public function addToCart(AddToCartRequest $request, Product $product)
+    public function addToCart(AddToCartRequest $request, Product $product, $quantity)
     {
         /** @var CartInterface $service */
         $service = findService(CartInterface::class);
         throw_unless($service, CartNotAvailableException::class);
 
         $service::activeCart($request->getEmailAddressId())->upsertItem(
-            $product->createCartItem((int) ($request->quantity ?? 1))
+            $product->createCartItem((int) $quantity)
         );
 
         // TODO - should CartInterface provide this answer?

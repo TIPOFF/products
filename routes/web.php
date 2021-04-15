@@ -17,6 +17,8 @@ Route::middleware(config('tipoff.web.middleware_group'))
             TipoffAuthenticate::class.':email,web',
             VerifyCsrfTokenGet::class,
         ])->group(function () {
-            Route::get('products/{product}/add-to-cart', [ProductsController::class, 'addToCart'])->name('products.add-to-cart');
+            Route::get('products/{product}/add-to-cart/{quantity}/{_token?}', [ProductsController::class, 'addToCart'])
+                ->where('quantity', '[1-9][0-9]*')
+                ->name('products.add-to-cart');
         });
     });
