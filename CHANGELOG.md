@@ -29,3 +29,8 @@ All notable changes to `products` will be documented in this file.
 ## 2.1.0 - 2021-04-13
 
 - update locations
+
+## 2.2.0 - 2021-04-15
+
+- routes
+- add to cart functionality
