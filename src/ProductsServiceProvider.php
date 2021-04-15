@@ -25,6 +25,7 @@ class ProductsServiceProvider extends TipoffServiceProvider
                 'product-cart-item' => Components\Cart\ProductComponent::class,
                 'product-order-item' => Components\Order\ProductComponent::class,
             ])
+            ->hasWebRoute('web')
             ->name('products')
             ->hasViews()
             ->hasConfigFile();
