@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tipoff\Products\Http\Controllers;
 
+use Illuminate\Support\Facades\Route;
 use Tipoff\Locations\Models\Location;
 use Tipoff\Locations\Models\Market;
 use Tipoff\Locations\Services\LocationRouter;
@@ -38,7 +39,11 @@ class ProductsController extends BaseController
             $product->createCartItem($request->quantity ?? 1)
         );
 
-        // TODO - where to go after cart addition?  should CartInterface provide this answer?
+        // TODO - should CartInterface provide this answer?
+        if (Route::has('checkout.cart-show')) {
+            return redirect(\route('checkout.cart-show'));
+        }
+
         return redirect(LocationRouter::build('products'));
     }
 }
