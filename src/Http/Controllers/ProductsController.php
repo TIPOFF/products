@@ -18,6 +18,7 @@ class ProductsController extends BaseController
     public function index(Market $market, Location $location)
     {
         $products = Product::query()->byLocation($location->id)->get();
+
         return view('products::products')->with([
             'market' => $market,
             'location' => $location,
