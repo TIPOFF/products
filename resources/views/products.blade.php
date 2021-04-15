@@ -4,10 +4,7 @@
     @include('products::partials._identity_tag')
 
     @foreach($products as $product)
-        <form method="POST" action="{{ route('products.add-to-cart') }}">
-            @csrf
-            <input type="hidden" name="id" value="{{$product->id}}">
-
+        <form method="GET" action="{{ route('products.add-to-cart', ['product' => $product, '_token' => csrf_token()]) }}">
             {{ $product->title }}
 
             @if($hasCart)

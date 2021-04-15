@@ -97,17 +97,16 @@ class ProductsControllerTest extends TestCase
         $this->actingAs(User::factory()->create());
 
         $product = Product::factory()->create();
-        $this->post($this->webUrl("products/add-to-cart"), [
-                'id' => $product->id,
-                'quantity' => 1,
-            ])->assertStatus(500);
+        $this->get(route('products.add-to-cart', [
+            'product' => $product,
+            'quantity' => 1
+        ]))
+            ->assertStatus(500);
     }
 
     /** @test */
     public function add_to_cart_with_service()
     {
-        $this->logToStderr();
-
         $cartItem = \Mockery::mock(CartItemInterface::class);
         $cartItem->shouldReceive('setLocationId')->once()->andReturnSelf();
         $cartItem->shouldReceive('setTaxCode')->once()->andReturnSelf();
@@ -126,9 +125,10 @@ class ProductsControllerTest extends TestCase
         ]);
         session([LocationResolver::TIPOFF_LOCATION => $product->location->id]);
 
-        $this->post($this->webUrl("products/add-to-cart"), [
-            'id' => $product->id,
-            'quantity' => 1,
-        ])->assertRedirect();
+        $this->get(route('products.add-to-cart', [
+            'product' => $product,
+            'quantity' => 1
+        ]))
+            ->assertRedirect();
     }
 }
