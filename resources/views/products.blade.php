@@ -11,7 +11,7 @@
             {{ $product->title }}
 
             @if($hasCart)
-                <button type="submit" value="{{ __('Add to cart') }}"/>
+                <button type="submit">{{ __('Add to cart') }}</button>
             @endif
         </form>
     @endforeach

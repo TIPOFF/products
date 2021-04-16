@@ -9,7 +9,6 @@ use Tipoff\Authorization\Models\EmailAddress;
 use Tipoff\Authorization\Models\User;
 use Tipoff\Locations\Models\Location;
 use Tipoff\Locations\Models\Market;
-use Tipoff\Locations\Services\LocationResolver;
 use Tipoff\Products\Models\Product;
 use Tipoff\Products\Tests\TestCase;
 use Tipoff\Support\Contracts\Checkout\CartInterface;
@@ -106,16 +105,14 @@ class ProductsControllerTest extends TestCase
     /** @test */
     public function add_to_cart_with_service()
     {
-        $this->logToStderr();
-
         $cartItem = \Mockery::mock(CartItemInterface::class);
         $cartItem->shouldReceive('setLocationId')->once()->andReturnSelf();
         $cartItem->shouldReceive('setTaxCode')->once()->andReturnSelf();
 
         $service = \Mockery::mock(CartInterface::class);
-        $service->shouldReceive('activeCart')->once()->andReturnSelf();
         $service->shouldReceive('createItem')->once()->andReturn($cartItem);
-        $service->shouldReceive('upsertItem')->once()->andReturn($cartItem);
+        $service->shouldReceive('queuedUpsertItem')->once()->andReturn($cartItem);
+        $service->shouldReceive('route')->once()->andReturn('/');
 
         $this->app->instance(CartInterface::class, $service);
 
@@ -124,7 +121,6 @@ class ProductsControllerTest extends TestCase
         $product = Product::factory()->create([
             'location_id' => Location::factory()->create(),
         ]);
-        session([LocationResolver::TIPOFF_LOCATION => $product->location->id]);
 
         $this->post($this->webUrl("products/add-to-cart"), [
             'id' => $product->id,

@@ -6,7 +6,6 @@ namespace Tipoff\Products\Http\Controllers;
 
 use Tipoff\Locations\Models\Location;
 use Tipoff\Locations\Models\Market;
-use Tipoff\Locations\Services\LocationRouter;
 use Tipoff\Products\Exceptions\CartNotAvailableException;
 use Tipoff\Products\Http\Requests\AddToCartRequest;
 use Tipoff\Products\Models\Product;
@@ -34,11 +33,11 @@ class ProductsController extends BaseController
         throw_unless($service, CartNotAvailableException::class);
 
         $product = Product::query()->findOrFail($request->id);
-        $service::activeCart($request->getEmailAddressId())->upsertItem(
-            $product->createCartItem($request->quantity ?? 1)
+        $service::queuedUpsertItem(
+            $product->createCartItem($request->quantity ?? 1),
+            $request->getEmailAddressId()
         );
 
-        // TODO - where to go after cart addition?  should CartInterface provide this answer?
-        return redirect(LocationRouter::build('products'));
+        return redirect($service::route('checkout.cart-show'));
     }
 }

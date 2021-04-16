@@ -10,8 +10,5 @@ Route::middleware(config('tipoff.web.middleware_group'))
     ->group(function () {
         Route::getLocation('products', 'products', [ProductsController::class, 'index']);
 
-        // PROTECTED ROUTES
-        Route::middleware(config('tipoff.api.auth_middleware'))->group(function () {
-            Route::post('products/add-to-cart', [ProductsController::class, 'addToCart'])->name('products.add-to-cart');
-        });
+        Route::post('products/add-to-cart', [ProductsController::class, 'addToCart'])->name('products.add-to-cart');
     });
