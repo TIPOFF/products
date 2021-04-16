@@ -9,7 +9,6 @@ use Tipoff\Authorization\Models\EmailAddress;
 use Tipoff\Authorization\Models\User;
 use Tipoff\Locations\Models\Location;
 use Tipoff\Locations\Models\Market;
-use Tipoff\Locations\Services\LocationResolver;
 use Tipoff\Products\Models\Product;
 use Tipoff\Products\Tests\TestCase;
 use Tipoff\Support\Contracts\Checkout\CartInterface;
