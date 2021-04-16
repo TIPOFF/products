@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Tipoff\Products\Http\Controllers;
 
-use Illuminate\Support\Facades\Route;
 use Tipoff\Locations\Models\Location;
 use Tipoff\Locations\Models\Market;
-use Tipoff\Locations\Services\LocationRouter;
 use Tipoff\Products\Exceptions\CartNotAvailableException;
 use Tipoff\Products\Http\Requests\AddToCartRequest;
 use Tipoff\Products\Models\Product;
@@ -28,21 +26,18 @@ class ProductsController extends BaseController
         ]);
     }
 
-    public function addToCart(AddToCartRequest $request, Product $product, $quantity)
+    public function addToCart(AddToCartRequest $request)
     {
         /** @var CartInterface $service */
         $service = findService(CartInterface::class);
         throw_unless($service, CartNotAvailableException::class);
 
-        $service::activeCart($request->getEmailAddressId())->upsertItem(
-            $product->createCartItem((int) $quantity)
+        $product = Product::query()->findOrFail($request->id);
+        $service::queuedUpsertItem(
+            $product->createCartItem($request->quantity ?? 1),
+            $request->getEmailAddressId()
         );
 
-        // TODO - should CartInterface provide this answer?
-        if (Route::has('checkout.cart-show')) {
-            return redirect(\route('checkout.cart-show'));
-        }
-
-        return redirect(LocationRouter::build('products'));
+        return redirect($service::route('checkout.cart-show'));
     }
 }

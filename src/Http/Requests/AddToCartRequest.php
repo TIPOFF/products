@@ -11,9 +11,15 @@ class AddToCartRequest extends FormRequest
 {
     use UsesTipoffAuthentication;
 
+    public function authorize()
+    {
+        return true;
+    }
+
     public function rules()
     {
         return [
+            'id' => 'required|exists:products',
             'quantity' => 'nullable|integer|min:1',
         ];
     }
