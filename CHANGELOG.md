@@ -34,3 +34,7 @@ All notable changes to `products` will be documented in this file.
 
 - routes
 - add to cart functionality
+
+## 2.2.1 - 2021-04-16
+
+- implement new cart interface
