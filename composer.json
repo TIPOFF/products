@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "tipoff/authorization": "dev-pdbreen/feature/email-login as 2.8.2",
+        "tipoff/authorization": "^2.8.3",
         "tipoff/locations": "^2.10.1",
         "tipoff/support": "dev-pdbreen/feature/checkout-queue-upsert as 2.1.2"
     },
