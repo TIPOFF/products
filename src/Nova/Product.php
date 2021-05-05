@@ -41,13 +41,13 @@ class Product extends BaseResource
     public function fields(Request $request)
     {
         return array_filter([
-            Text::make('SKU (Internal)', 'sku')->required(),
-            Text::make('Title (What Customers See)', 'title'),
-            Slug::make('Slug')->from('Title'),
-            Number::make('Amount')->sortable(),
+            Text::make('SKU (Internal)', 'sku')->rules('required')->creationRules('unique:products,sku')->updateRules('unique:products,sku,{{resourceId}}'),
+            Text::make('Title (What Customers See)', 'title')->rules('required'),
+            Slug::make('Slug')->from('Title')->rules('required')->creationRules('unique:products,slug')->updateRules('unique:products,slug,{{resourceId}}'),
+            Number::make('Amount')->rules(['required', 'max:10'])->sortable(),
             Text::make('Tax Code', 'tax_code'),
 
-            nova('location') ? BelongsTo::make('Location', 'location', nova('location')) : null,
+            nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->nullable() : null,
 
             new Panel('Data Fields', $this->dataFields()),
         ]);
